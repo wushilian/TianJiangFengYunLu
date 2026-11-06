@@ -33,6 +33,9 @@ jobs:
           yes | "$SDKMANAGER" --licenses >/dev/null || true
           "$SDKMANAGER" --install "platforms;android-36" "build-tools;36.0.0"
 
+      - name: Generate game data package
+        run: python3 tools/build_game_zip.py
+
       - name: Build APK
         run: |
           SDK_ROOT="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
@@ -44,9 +47,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          APK=app/build/outputs/apk/debug/app-debug.apk
+          VERSION="${GITHUB_REF_NAME#v}"
+          APK="TianJiangFengYun-${VERSION}.apk"
+          cp app/build/outputs/apk/debug/app-debug.apk "$APK"
           if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
             gh release upload "$GITHUB_REF_NAME" "$APK" --clobber
+            gh release delete-asset "$GITHUB_REF_NAME" app-debug.apk --yes || true
           else
             gh release create "$GITHUB_REF_NAME" "$APK" \
               --title "天降风云录16-10 ${GITHUB_REF_NAME}" \
