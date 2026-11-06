@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">天降风云录</string>
+    <string name="boot_loading">正在载入江湖…</string>
+    <string name="boot_hint">首次启动需要解包约 60MB 游戏资源，请稍候</string>
+</resources>

@@ -1,0 +1,22 @@
+# Gradle / Android build output
+.gradle/
+build/
+app/build/
+local.properties
+*.iml
+.idea/
+
+# 不纳入仓库的游戏数据与原生库
+app/src/main/assets/game.zip
+app/src/main/jniLibs/
+
+# 构建产物 / 日志
+*.apk
+*.aab
+*.log
+*.tmp
+
+# OS / Python
+.DS_Store
+__pycache__/
+*.pyc
