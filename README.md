@@ -17,8 +17,8 @@
 
 当前构建：**1.5.29（versionCode 49）**。
 
-> 仓库不包含游戏本体素材、`game.zip`、原生 `.so` 和 APK 源码文件；  
-> APK 通过 GitHub Releases 提供，构建所需的二进制见[构建](#构建)。
+> 仓库包含可修改的游戏数据 `tianjiang_game/`（Data、Graphics、Audio、Fonts）。  
+> `game.zip`、原生 `.so` 和 APK 源码文件不纳入版本库；APK 通过 GitHub Releases 提供。
 
 ---
 
@@ -55,6 +55,7 @@ TianJiangFengYunLu/
 │   ├── src/main/res/       资源与布局
 │   ├── src/main/assets/    core.zip（热更新包）
 │   └── build.gradle
+├── tianjiang_game/         游戏本体数据（Data/Graphics/Audio/Fonts）
 ├── tools/                  构建、安装与数据脚本
 ├── docs/screenshots/       README 截图
 ├── gradle/                 Gradle Wrapper
@@ -63,15 +64,27 @@ TianJiangFengYunLu/
 └── README.md
 ```
 
-需要自行放置、不进入仓库的二进制：
+游戏数据已在 `tianjiang_game/` 中，可直接修改：
 
 ```text
-app/src/main/assets/game.zip          RPG Maker XP 游戏数据压缩包
+tianjiang_game/
+├── Data/       地图、数据库、脚本
+├── Graphics/   角色、战斗图、图块、图片
+├── Audio/      BGM、BGS、ME、SE
+├── Fonts/      游戏字体
+├── Game.ini
+├── mkxp.json
+└── mkxp_compat.rb
+```
+
+需要自行放置的只有原生库：
+
+```text
 app/src/main/jniLibs/arm64-v8a/*.so   mkxp-z ARM64 原生库
 app/src/main/jniLibs/armeabi-v7a/*.so mkxp-z ARMv7 原生库
 ```
 
-`game.zip` 根目录应包含 `Data/`、`Graphics/`、`Audio/`、`Fonts/`、`mkxp.json` 等游戏文件。
+`app/src/main/assets/game.zip` 由 `tianjiang_game/` 通过脚本生成，不提交到 Git。
 
 ---
 
@@ -85,11 +98,13 @@ app/src/main/jniLibs/armeabi-v7a/*.so mkxp-z ARMv7 原生库
 
 ### 步骤
 
-1. 准备游戏数据，放到：
+1. 生成游戏数据包（仓库已带 `tianjiang_game/`）：
 
-   ```text
-   app/src/main/assets/game.zip
+   ```bash
+   python3 tools/build_game_zip.py
    ```
+
+   会在 `app/src/main/assets/` 下生成 `game.zip` 和 `core.zip`。
 
 2. 准备 mkxp-z 原生库，放到：
 
@@ -138,19 +153,13 @@ app/src/main/jniLibs/armeabi-v7a/*.so mkxp-z ARMv7 原生库
 - `app/src/main/assets/game.zip`
 - `app/src/main/assets/core.zip`
 
-目录约定：`tianjiang_game` 与本仓库同级。
-
-```text
-安卓/
-├── TianJiangFengYunLu/
-└── tianjiang_game/
-```
-
-运行：
+仓库内已包含 `tianjiang_game/`；修改 Data、Graphics、Audio 或 Fonts 后运行：
 
 ```bash
 python3 tools/build_game_zip.py
 ```
+
+脚本会重新生成 `game.zip`，并把热更新文件重新打包为 `core.zip`。
 
 ---
 
@@ -182,8 +191,8 @@ APK 见仓库的 **Releases** 页面：
 
 ## 免责声明
 
-本项目仅用于 Android 移植、兼容性研究和学习交流。  
-《天降风云录16-10》的游戏数据、图片、音频、字体及其他素材版权归原作者及相应权利方所有。本仓库不包含游戏本体素材、`game.zip`、原生 `.so` 或 APK 源码文件；请使用你合法拥有的游戏数据进行构建。
+本项目用于 Android 移植、兼容性研究和学习交流，仓库内包含游戏数据以便修改和二次开发。  
+《天降风云录16-10》的原始游戏数据、图片、音频、字体及其他素材版权归原作者及相应权利方所有；如果你不是权利人，请仅用于学习研究，不要用于商业分发。若权利人提出异议，请删除对应素材。
 
 ---
 

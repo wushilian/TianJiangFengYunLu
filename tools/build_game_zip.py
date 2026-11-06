@@ -2,10 +2,10 @@
 from pathlib import Path
 from zipfile import ZipFile, ZIP_DEFLATED
 
-ROOT = Path(__file__).resolve().parents[2]
-GAME = ROOT / "tianjiang_game"
-OUT = ROOT / "tianjiang" / "app" / "src" / "main" / "assets" / "game.zip"
-CORE = ROOT / "tianjiang" / "app" / "src" / "main" / "assets" / "core.zip"
+from paths import REPO, GAME
+OUT = REPO / "app" / "src" / "main" / "assets" / "game.zip"
+CORE = REPO / "app" / "src" / "main" / "assets" / "core.zip"
+
 CORE_FILES = (
     "Data/Scripts.rxdata", "mkxp.json", "mkxp_compat.rb",
     "Data/Map020.rxdata", "Data/Enemies.rxdata", "Data/Troops.rxdata",

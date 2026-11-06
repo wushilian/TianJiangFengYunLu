@@ -2,7 +2,8 @@
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
-GAME_DIR = Path(__file__).resolve().parents[2] / "tianjiang_game"
+from paths import GAME
+GAME_DIR = GAME
 SRC = GAME_DIR / "Graphics" / "Pictures" / "Endflash"
 OUT = GAME_DIR / "Graphics" / "Pictures" / "TrueEnd"
 OUT.mkdir(parents=True, exist_ok=True)

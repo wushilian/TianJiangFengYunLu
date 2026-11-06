@@ -6,8 +6,8 @@ from pathlib import Path
 from rubymarshal.reader import loads
 from rubymarshal.writer import writes
 
-ROOT = Path(__file__).resolve().parents[2]
-SCRIPTS = ROOT / "tianjiang_game" / "Data" / "Scripts.rxdata"
+from paths import GAME
+SCRIPTS = GAME / "Data" / "Scripts.rxdata"
 
 LINE_RE = re.compile(r'^(\s*when\s+[^\n:]+?)\s*(?<!:):(?!:)\s*')
 

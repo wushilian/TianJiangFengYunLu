@@ -1,0 +1,27 @@
+{
+  "rgssVersion": 1,
+  "windowTitle": "天降风云录",
+  "fullscreen": true,
+  "fixedAspectRatio": true,
+  "smoothScaling": false,
+  "integerScalingActive": true,
+  "integerScalingLastMile": true,
+  "vsync": true,
+  "defScreenW": 640,
+  "defScreenH": 480,
+  "preloadScript": [
+    "mkxp_compat.rb"
+  ],
+  "fontSub": [
+    "黑体>noto sans cjk sc",
+    "宋体>noto sans cjk sc",
+    "微软雅黑>noto sans cjk sc",
+    "simhei>noto sans cjk sc",
+    "arial>noto sans cjk sc",
+    "arial black>noto sans cjk sc",
+    "tahoma>noto sans cjk sc",
+    "verdana>noto sans cjk sc",
+    "times new roman>noto sans cjk sc"
+  ],
+  "SESourceCount": 16
+}

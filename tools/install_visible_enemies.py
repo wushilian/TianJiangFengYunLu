@@ -6,8 +6,7 @@ from pathlib import Path
 from rubymarshal.reader import loads
 from rubymarshal.writer import writes
 
-ROOT = Path(__file__).resolve().parents[2]
-GAME = ROOT / "tianjiang_game"
+from paths import GAME
 SCRIPTS = GAME / "Data" / "Scripts.rxdata"
 SOURCE = Path(__file__).with_name("tianjiang_visible_enemies.rb")
 NAME = b"TianJiangVisibleEnemies"
