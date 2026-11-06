@@ -178,7 +178,7 @@ python3 tools/build_game_zip.py
 
 APK 见仓库的 **Releases** 页面：
 
-<https://github.com/wushilian/TianJiangFengYunLu/releases>
+<https://github.com/wushilian/TianJiangFengYunLu/releases/latest>
 
 ---
 
