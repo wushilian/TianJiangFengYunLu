@@ -17,8 +17,8 @@
 
 当前构建：**1.5.29（versionCode 49）**。
 
-> 仓库包含可修改的游戏数据 `tianjiang_game/`（Data、Graphics、Audio、Fonts）。  
-> `game.zip`、原生 `.so` 和 APK 源码文件不纳入版本库；APK 通过 GitHub Releases 提供。
+> 仓库包含可修改的游戏数据 `tianjiang_game/`（Data、Graphics、Audio、Fonts）和 ARM 原生库。  
+> `game.zip` 和 APK 构建产物不纳入版本库；APK 由 GitHub Actions 构建并发布到 Releases。
 
 ---
 
@@ -56,6 +56,7 @@ TianJiangFengYunLu/
 │   ├── src/main/assets/    core.zip（热更新包）
 │   └── build.gradle
 ├── tianjiang_game/         游戏本体数据（Data/Graphics/Audio/Fonts）
+├── app/src/main/jniLibs/   ARM64 / ARMv7 原生库
 ├── tools/                  构建、安装与数据脚本
 ├── docs/screenshots/       README 截图
 ├── gradle/                 Gradle Wrapper
@@ -77,11 +78,11 @@ tianjiang_game/
 └── mkxp_compat.rb
 ```
 
-需要自行放置的只有原生库：
+ARM64 / ARMv7 原生库已放在：
 
 ```text
-app/src/main/jniLibs/arm64-v8a/*.so   mkxp-z ARM64 原生库
-app/src/main/jniLibs/armeabi-v7a/*.so mkxp-z ARMv7 原生库
+app/src/main/jniLibs/arm64-v8a/
+app/src/main/jniLibs/armeabi-v7a/
 ```
 
 `app/src/main/assets/game.zip` 由 `tianjiang_game/` 通过脚本生成，不提交到 Git。
@@ -106,25 +107,7 @@ app/src/main/jniLibs/armeabi-v7a/*.so mkxp-z ARMv7 原生库
 
    会在 `app/src/main/assets/` 下生成 `game.zip` 和 `core.zip`。
 
-2. 准备 mkxp-z 原生库，放到：
-
-   ```text
-   app/src/main/jniLibs/arm64-v8a/
-   app/src/main/jniLibs/armeabi-v7a/
-   ```
-
-   需要的库：
-
-   ```text
-   libmkxp-z.so
-   libruby.so
-   libSDL2.so
-   libSDL2_image.so
-   libSDL2_ttf.so
-   libSDL2_sound.so
-   libopenal.so
-   libc++_shared.so
-   ```
+2. 原生库已在 `app/src/main/jniLibs/` 中，无需额外准备。
 
 3. 写入 `local.properties`：
 
@@ -180,6 +163,16 @@ python3 tools/build_game_zip.py
 - 需要 Android 6.0（API 23）及以上
 
 ---
+
+## 自动发布
+
+推送 `v*` 标签会触发 GitHub Actions：
+
+- 构建 `assembleDebug`；
+- 自动创建/更新对应 Release；
+- 上传 `app-debug.apk` 作为 Release 附件。
+
+工作流文件：`.github/workflows/release.yml`。
 
 ## 下载
 

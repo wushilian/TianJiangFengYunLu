@@ -8,7 +8,6 @@ local.properties
 
 # 不纳入仓库的游戏数据与原生库
 app/src/main/assets/game.zip
-app/src/main/jniLibs/
 tianjiang_game/**/*.bak*
 
 # 构建产物 / 日志
